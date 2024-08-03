@@ -13,3 +13,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Remove trailing whitespace
+vim.api.nvim_create_autocmd('BufWritePre', {
+  desc = 'Remove trailing whitespace',
+  group = custom,
+  callback = function()
+    vim.cmd [[:%s/\s\+$//e]]
+  end,
+})
