@@ -1,6 +1,10 @@
 --[[ KEYMAPS ]]
 -- See :help vim.keymap
 
+-- Move highlighted region up and down
+vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
+
 -- Delete the line below and move the cursor to the left
 vim.keymap.set('n', 'J', "mzJ'z")
 
