@@ -51,6 +51,14 @@ https://github.com/tryprncp/neovim
     end,
   },
 
+  { -- Text colorizer
+    'norcalli/nvim-colorizer.lua',
+    event = { 'BufNewFile', 'BufReadPre' },
+    config = function()
+      require('colorizer').setup()
+    end,
+  },
+
   {
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
