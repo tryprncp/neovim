@@ -22,3 +22,15 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.cmd [[:%s/\s\+$//e]]
   end,
 })
+
+-- Fix jumping between netrw and windows
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'netrw',
+  group = custom,
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'n', '<C-h>', '<cmd>TmuxNavigateLeft<cr>', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', '<C-j>', '<cmd>TmuxNavigateDown<cr>', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', '<C-k>', '<cmd>TmuxNavigateUp<cr>', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', '<C-l>', '<cmd>TmuxNavigateRight<cr>', { noremap = true, silent = true })
+  end,
+})
