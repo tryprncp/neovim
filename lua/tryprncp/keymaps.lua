@@ -1,6 +1,9 @@
 --[[ KEYMAPS ]]
 -- See :help vim.keymap
 
+-- Toggle relative line number
+vim.keymap.set('n', '<leader>#', '<cmd>set invrelativenumber<cr>')
+
 -- Move highlighted region up and down
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
