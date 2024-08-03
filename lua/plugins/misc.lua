@@ -9,6 +9,10 @@ return {
     event = 'InsertEnter',
   },
 
+  { -- Helpful plugin for visualizing undotree
+    'mbbill/undotree',
+  },
+
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'UIEnter',
