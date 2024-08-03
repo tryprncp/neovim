@@ -11,6 +11,9 @@ return {
 
   { -- Helpful plugin for visualizing undotree
     'mbbill/undotree',
+    keys = {
+      { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Toggle undotree' },
+    },
   },
 
   { -- Useful plugin to show you pending keybinds.
