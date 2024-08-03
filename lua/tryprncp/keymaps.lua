@@ -4,6 +4,13 @@
 -- Toggle relative line number
 vim.keymap.set('n', '<leader>#', '<cmd>set invrelativenumber<cr>')
 
+-- Netrw
+vim.g.netrw_banner = 0
+vim.keymap.set({ 'n', 'v' }, '\\', '<cmd>Lexplore<cr>', { desc = 'Toggle filetree' })
+vim.keymap.set('n', '<leader>fe', '<cmd>Explore<cr>', { desc = 'Open Netrw' })
+vim.g.netrw_winsize = 15
+vim.g.netrw_liststyle = 3
+
 -- Move highlighted region up and down
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
