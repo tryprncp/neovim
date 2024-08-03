@@ -5,6 +5,9 @@
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
 
+-- Zoom current window
+vim.keymap.set({ 'n', 'v' }, '<leader>z', '<cmd>lua MiniMisc.zoom()<cr>', { desc = 'Zoom current window' })
+
 -- Delete the line below and move the cursor to the left
 vim.keymap.set('n', 'J', "mzJ'z")
 
