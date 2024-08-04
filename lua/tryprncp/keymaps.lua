@@ -2,7 +2,10 @@
 -- See :help vim.keymap
 
 -- Toggle relative line number
-vim.keymap.set('n', '<leader>#', '<cmd>set invrelativenumber<cr>')
+vim.keymap.set('n', '<leader>ln', '<cmd>set invrelativenumber<cr>', { desc = 'Toggle relative line number' })
+
+-- Toggle line wrap
+vim.keymap.set('n', '<leader>lw', '<cmd>set invwrap<cr>', { desc = 'Toggle line wrap' })
 
 -- Helpful keymap in vertical edit mode
 vim.keymap.set('i', '<C-c>', '<Esc>')
