@@ -10,6 +10,10 @@ vim.keymap.set('n', '<leader>lw', '<cmd>set invwrap<cr>', { desc = 'Toggle line 
 -- Helpful keymap in vertical edit mode
 vim.keymap.set('i', '<C-c>', '<Esc>')
 
+-- Keymaps for diffget. Useful when resolving conflicts
+vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>')
+vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>')
+
 -- Netrw
 vim.g.netrw_banner = 0
 vim.keymap.set({ 'n', 'v' }, '\\', '<cmd>Lexplore<cr>', { desc = 'Toggle filetree' })
