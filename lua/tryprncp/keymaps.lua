@@ -4,6 +4,9 @@
 -- Toggle relative line number
 vim.keymap.set('n', '<leader>#', '<cmd>set invrelativenumber<cr>')
 
+-- Helpful keymap in vertical edit mode
+vim.keymap.set('i', '<C-c>', '<Esc>')
+
 -- Netrw
 vim.g.netrw_banner = 0
 vim.keymap.set({ 'n', 'v' }, '\\', '<cmd>Lexplore<cr>', { desc = 'Toggle filetree' })
