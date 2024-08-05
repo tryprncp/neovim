@@ -5,13 +5,23 @@ return {
     event = { 'BufNewFile', 'BufReadPre' },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      { -- NOTE: Must be loaded before dependants
+        'williamboman/mason.nvim',
+        event = 'UIEnter',
+        config = function()
+          require('mason').setup {
+            ui = {
+              border = 'rounded',
+            },
+          }
+        end,
+      },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      -- { 'j-hui/fidget.nvim', opts = {} },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
@@ -158,12 +168,6 @@ return {
               -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
-        },
-      }
-
-      require('mason').setup {
-        ui = {
-          border = 'rounded',
         },
       }
 
