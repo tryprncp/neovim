@@ -59,6 +59,11 @@ https://github.com/tryprncp/neovim
     end,
   },
 
+  { -- Markdown preview
+    'OXY2DEV/markview.nvim',
+    ft = 'markdown',
+  },
+
   {
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
