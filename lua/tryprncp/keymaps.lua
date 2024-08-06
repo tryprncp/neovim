@@ -47,14 +47,9 @@ vim.keymap.set('v', '<leader>d', '"_d')
 
 vim.keymap.set('n', 'Q', '<nop>')
 
--- Keymaps for tabpages
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New tabpage' })
-vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = 'Close current tabpage' })
-vim.keymap.set('n', '<leader>tC', '<cmd>tabonly<cr>', { desc = 'Close all other tabpages' })
-vim.keymap.set('n', '<leader>tu', '1gt', { desc = 'Go to tabpage 1' })
-vim.keymap.set('n', '<leader>ti', '2gt', { desc = 'Go to tabpage 2' })
-vim.keymap.set('n', '<leader>to', '3gt', { desc = 'Go to tabpage 3' })
-vim.keymap.set('n', '<leader>tp', '4gt', { desc = 'Go to tabpage 4' })
+-- Stay in indent mode
+set('v', '<', '<gv')
+set('v', '>', '>gv')
 
 -- Navigate between location list items
 vim.keymap.set('n', '<leader>k', '<cmd>lnext<cr>zz', { desc = 'Next item in location list' })
