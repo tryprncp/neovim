@@ -166,6 +166,14 @@ https://github.com/tryprncp/neovim
       --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = { 'BufNewFile', 'BufReadPre' },
+    config = function()
+      vim.cmd [[
+        hi TreesitterContextLineNumber guifg=#7aa2f7
+        hi TreesitterContext guibg=NONE
+      ]]
     end,
   },
 }
