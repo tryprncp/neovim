@@ -1,4 +1,3 @@
---[[ KEYMAPS ]]
 local set = vim.keymap.set
 
 -- Set <space> as the leader key
@@ -6,29 +5,22 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 set({ 'n', 'v' }, '<Space>', '<Nop>')
 
--- Toggle relative line number
-set('n', '<leader>ln', '<cmd>set invrelativenumber<cr>', { desc = 'Toggle relative line number' })
-
--- Toggle line wrap
-set('n', '<leader>lw', '<cmd>set invwrap<cr>', { desc = 'Toggle line wrap' })
+set({ 'n', 'v' }, '<leader>z', '<cmd>lua MiniMisc.zoom()<cr>', { desc = 'Zoom current window' })
+set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { silent = true })
+set('n', '<C-c>', '<cmd>nohlsearch<cr>')
 
 -- Helpful keymap in vertical edit mode
 set('i', '<C-c>', '<Esc>')
-
--- Zoom current window
-set({ 'n', 'v' }, '<leader>z', '<cmd>lua MiniMisc.zoom()<cr>', { desc = 'Zoom current window' })
-
--- SpaceX to make executable file
-set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { silent = true })
-
--- Cancel the highlighs
-set('n', '<C-c>', '<cmd>nohlsearch<cr>')
 
 -- Disable the worst key
 set('n', 'Q', '<nop>')
 
 -- Delete the line below and move the cursor to the left
 set('n', 'J', "mzJ'z")
+
+-- Toggles
+set('n', '<leader>tn', '<cmd>set invrelativenumber<cr>', { desc = 'Toggle relative line number' })
+set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = 'Toggle line wrap' })
 
 -- Keymaps for diffget. Useful when resolving conflicts
 set('n', 'gh', '<cmd>diffget //2<cr>')

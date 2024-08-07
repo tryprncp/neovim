@@ -1,11 +1,6 @@
--- [[ AUTOCOMMANDS ]]
---  See `:help lua-guide-autocommands`
-
--- Create augroup
 local custom = vim.api.nvim_create_augroup('custom', { clear = true })
 
 -- Highlight when yanking (copying) text
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = custom,
@@ -23,9 +18,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
--- Fix jumping between netrw and windows
+-- Fix jumping between windows
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'netrw',
+  pattern = { 'netrw', 'markdown' },
   group = custom,
   callback = function()
     vim.api.nvim_buf_set_keymap(0, 'n', '<C-h>', '<cmd>TmuxNavigateLeft<cr>', { noremap = true, silent = true })
@@ -35,8 +30,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Equalize windows
+-- Equalize the size of windows
 vim.api.nvim_create_autocmd({ 'VimResized', 'WinResized' }, {
+  group = custom,
   callback = function()
     vim.cmd 'tabdo wincmd ='
   end,
