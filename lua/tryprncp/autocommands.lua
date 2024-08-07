@@ -34,3 +34,10 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_buf_set_keymap(0, 'n', '<C-l>', '<cmd>TmuxNavigateRight<cr>', { noremap = true, silent = true })
   end,
 })
+
+-- Equalize windows
+vim.api.nvim_create_autocmd({ 'VimResized', 'WinResized' }, {
+  callback = function()
+    vim.cmd 'tabdo wincmd ='
+  end,
+})
