@@ -155,4 +155,21 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+
+  {
+    'stevearc/oil.nvim',
+    event = 'UIEnter',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {
+        keymaps = {
+          ['<C-h>'] = false,
+          ['<M-h>'] = false,
+        },
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
+      }
+      vim.keymap.set('n', '\\', '<cmd>Oil<cr>', { desc = 'Open file manager' })
+    end,
+  },
 }

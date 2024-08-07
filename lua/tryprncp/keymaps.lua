@@ -48,13 +48,6 @@ set('n', '<C-u>', '<C-u>zz')
 set('n', 'n', 'nzzzv')
 set('n', 'N', 'Nzzzv')
 
--- Netrw
-vim.g.netrw_banner = 0
-set({ 'n', 'v' }, '\\', '<cmd>Lexplore<cr>', { desc = 'Toggle filetree' })
-set('n', '<leader>fe', '<cmd>Explore<cr>', { desc = 'Open Netrw' })
-vim.g.netrw_winsize = 15
-vim.g.netrw_liststyle = 3
-
 -- Helpful for copy and paste
 set('x', '<leader>p', '"_dP')
 set('n', '<leader>y', '"+y')
