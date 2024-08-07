@@ -1,51 +1,49 @@
+local set = vim.opt
 -- Tab size
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+set.tabstop = 4
+set.softtabstop = 4
+set.shiftwidth = 4
+set.expandtab = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
 -- Make line numbers default
-vim.opt.number = true
-vim.opt.relativenumber = true
+set.number = true
+set.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+set.showmode = false
 
 -- Enable break indent
-vim.opt.breakindent = true
+set.breakindent = true
 
 -- Save undo history
-vim.opt.undofile = true
+set.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+set.ignorecase = true
+set.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+set.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+set.updatetime = 250
 
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+set.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+set.splitright = true
+set.splitbelow = true
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+set.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+set.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
+set.hlsearch = true
+set.incsearch = true

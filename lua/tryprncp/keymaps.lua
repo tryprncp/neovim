@@ -19,8 +19,8 @@ set('n', 'Q', '<nop>')
 set('n', 'J', "mzJ'z")
 
 -- Toggles
-set('n', '<leader>ln', '<cmd>set invrelativenumber<cr>', { desc = 'Toggle relative line number' })
-set('n', '<leader>lw', '<cmd>set invwrap<cr>', { desc = 'Toggle line wrap' })
+set('n', '<leader>tn', '<cmd>set invrelativenumber<cr>', { desc = 'Toggle relative line number' })
+set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = 'Toggle line wrap' })
 
 -- Keymaps for diffget. Useful when resolving conflicts
 set('n', 'gh', '<cmd>diffget //2<cr>')
