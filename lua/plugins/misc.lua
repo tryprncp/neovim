@@ -1,8 +1,16 @@
 return {
-  { -- Detect tabstop
-    'tpope/vim-sleuth',
-    event = 'InsertEnter',
+
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      },
+    },
   },
+
+  { 'Bilal2453/luvit-meta', lazy = true },
 
   { -- "gc" to comment visual regions/lines
     'numToStr/Comment.nvim',
@@ -20,52 +28,19 @@ return {
     'folke/which-key.nvim',
     event = 'UIEnter',
     config = function()
-      require('which-key').setup()
-
-      -- Document existing key chains
+      require('which-key').setup {
+        preset = 'modern',
+      }
       require('which-key').add {
-        {
-          { '<leader>c', group = '[C]ode' },
-          { '<leader>d', group = '[D]ocument' },
-          { '<leader>r', group = '[R]ename' },
-          { '<leader>s', group = '[S]earch' },
-          { '<leader>w', group = '[W]orkspace' },
-          { '<leader>t', group = '[T]oggle' },
-          { '<leader>g', group = '[G]it operations', mode = { 'n', 'v' } },
-        },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>g', group = '[G]it operations', mode = { 'n', 'v' } },
       }
     end,
-  },
-
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    lazy = true,
-    event = { 'BufNewFile', 'BufReadPre' },
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-        }
-      end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        c = { 'clang-format' },
-        python = { 'autopep8' },
-      },
-    },
   },
 
   { -- Collection of various small independent plugins/modules

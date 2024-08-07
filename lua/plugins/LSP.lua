@@ -1,5 +1,11 @@
 return {
-  {
+
+  { -- Detect tabstop
+    'tpope/vim-sleuth',
+    event = 'InsertEnter',
+  },
+
+  { -- Main LSP config
     'neovim/nvim-lspconfig',
     lazy = true,
     event = { 'BufNewFile', 'BufReadPre' },
@@ -17,7 +23,6 @@ return {
       },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -133,6 +138,38 @@ return {
     end,
   },
 
+  { -- Autoformat
+    'stevearc/conform.nvim',
+    lazy = true,
+    event = { 'BufNewFile', 'BufReadPre' },
+    cmd = { 'ConformInfo' },
+    keys = {
+      {
+        '<leader>f',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = '',
+        desc = '[F]ormat buffer',
+      },
+    },
+    opts = {
+      notify_on_error = false,
+      format_on_save = function(bufnr)
+        local disable_filetypes = { c = true, cpp = true }
+        return {
+          timeout_ms = 500,
+          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+        }
+      end,
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        c = { 'clang-format' },
+        python = { 'autopep8' },
+      },
+    },
+  },
+
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     lazy = true,
@@ -172,24 +209,17 @@ return {
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
         mapping = cmp.mapping.preset.insert {
-          -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
-          -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          -- Accept ([y]es) the completion.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          -- Manually trigger a completion from nvim-cmp.
           ['<C-Space>'] = cmp.mapping.complete {},
-          -- <c-l> will move you to the right of each of the expansion locations.
           ['<C-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          -- <c-h> is similar, except moving you backwards.
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
@@ -197,11 +227,45 @@ return {
           end, { 'i', 's' }),
         },
         sources = {
+          {
+            name = 'lazydev',
+            group_index = 0,
+          },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
         },
       }
+    end,
+  },
+
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    event = 'UIEnter',
+    build = ':TSUpdate',
+    opts = {
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'css', 'javascript', 'python', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'ruby' },
+      },
+      indent = { enable = true, disable = { 'ruby' } },
+    },
+    config = function(_, opts)
+      ---@diagnostic disable-next-line: missing-fields
+      require('nvim-treesitter.configs').setup(opts)
+    end,
+  },
+
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = { 'BufNewFile', 'BufReadPre' },
+    config = function()
+      vim.cmd [[
+        hi TreesitterContextLineNumber guifg=#7aa2f7
+        hi TreesitterContext guibg=NONE
+      ]]
     end,
   },
 
