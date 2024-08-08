@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 -- Fix jumping between windows
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'netrw', 'markdown' },
+  pattern = { 'netrw', 'markdown', 'oil' },
   group = custom,
   callback = function()
     vim.api.nvim_buf_set_keymap(0, 'n', '<C-h>', '<cmd>TmuxNavigateLeft<cr>', { noremap = true, silent = true })
@@ -30,10 +30,19 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Equalize the size of windows
-vim.api.nvim_create_autocmd({ 'VimResized', 'WinResized' }, {
+-- Open Oil.nvim on startup
+vim.api.nvim_create_autocmd('VimEnter', {
   group = custom,
+  pattern = '*',
   callback = function()
-    vim.cmd 'tabdo wincmd ='
+    if vim.fn.argc() == 1 then
+      local arg = vim.fn.argv(0)
+      local stats = vim.uv.fs_stat(arg)
+      if stats and stats.type == 'directory' then
+        vim.defer_fn(function()
+          vim.cmd('Oil ' .. arg)
+        end, 100)
+      end
+    end
   end,
 })

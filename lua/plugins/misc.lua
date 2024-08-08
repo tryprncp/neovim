@@ -158,10 +158,10 @@ return {
 
   {
     'stevearc/oil.nvim',
-    event = 'UIEnter',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('oil').setup {
+        default_file_explorer = true,
         keymaps = {
           ['<C-h>'] = false,
           ['<M-h>'] = false,
