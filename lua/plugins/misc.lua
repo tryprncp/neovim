@@ -169,7 +169,7 @@ return {
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
       }
-      vim.keymap.set('n', '\\', '<cmd>Oil<cr>', { desc = 'Open file manager' })
+      vim.keymap.set('n', '<Backspace>', '<cmd>Oil<cr>', { desc = 'Open file manager' })
     end,
   },
 }

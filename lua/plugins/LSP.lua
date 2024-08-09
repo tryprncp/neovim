@@ -1,6 +1,6 @@
 return {
 
-  { -- Detect tabstop
+  { -- Detect tabstop and shiftwidth automatically
     'tpope/vim-sleuth',
     event = 'InsertEnter',
   },
@@ -101,7 +101,7 @@ return {
       local servers = {
         clangd = {},
         pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -141,7 +141,7 @@ return {
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = true,
-    event = { 'BufNewFile', 'BufReadPre' },
+    event = 'BufWritePre',
     cmd = { 'ConformInfo' },
     keys = {
       {
@@ -172,7 +172,6 @@ return {
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    lazy = true,
     event = 'InsertEnter',
     dependencies = {
       {
