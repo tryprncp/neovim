@@ -25,7 +25,7 @@ https://github.com/tryprncp/neovim
         config = {
           header = vim.split(logo, '\n'),
           center = {
-            { action = 'Oil', desc = ' Open file explorer', icon = ' ', key = '\\' },
+            { action = 'Oil', desc = ' Open file explorer', icon = ' ', key = '-' },
             { action = 'e $MYVIMRC', desc = ' Edit neovim config', icon = '󰈮 ', key = 'e' },
             { action = 'Mason', desc = ' Mason', icon = '󱘊 ', key = 'm' },
             { action = 'Lazy', desc = ' Lazy', icon = '󰒲 ', key = 'l' },

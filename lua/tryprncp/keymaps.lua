@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 set({ 'n', 'v' }, '<Space>', '<Nop>')
 
 set({ 'n', 'v' }, '<leader>z', '<cmd>lua MiniMisc.zoom()<cr>', { desc = 'Zoom current window' })
-set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { silent = true })
+set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { desc = 'make this file executable', silent = true })
 set('n', '<C-c>', '<cmd>nohlsearch<cr>')
 
 -- Helpful keymap in vertical edit mode
@@ -30,15 +30,13 @@ set('n', 'gl', '<cmd>diffget //3<cr>')
 set('v', 'J', ":m '>+1<cr>gv=gv")
 set('v', 'K', ":m '<-2<cr>gv=gv")
 
--- Stay in indent mode
+-- Stay in visual mode when indenting
 set('v', '<', '<gv')
 set('v', '>', '>gv')
 
--- Navigate between location list items
+-- Navigate up/down in quickfix/location list
 set('n', '<leader>k', '<cmd>lnext<cr>zz', { desc = 'Next item in location list' })
 set('n', '<leader>j', '<cmd>lprev<cr>zz', { desc = 'Previous item in location list' })
-
--- Navigate between quickfix list items
 set('n', '<leader>k', '<cmd>cnext<cr>zz', { desc = 'Next item in qfixlist' })
 set('n', '<leader>j', '<cmd>cprev<cr>zz', { desc = 'Previous item in qfixlist' })
 
