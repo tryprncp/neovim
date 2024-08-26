@@ -1,9 +1,17 @@
 local set = vim.opt
+
 -- Tab size
 set.tabstop = 4
 set.softtabstop = 4
 set.shiftwidth = 4
 set.expandtab = true
+
+-- Indenting
+set.breakindent = true
+set.smartindent = true
+
+-- Disable mouse
+set.mouse = ''
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -14,9 +22,6 @@ set.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
 set.showmode = false
-
--- Enable break indent
-set.breakindent = true
 
 -- Save undo history
 set.undofile = true

@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 set({ 'n', 'v' }, '<Space>', '<Nop>')
 
 set({ 'n', 'v' }, '<leader>z', '<cmd>lua MiniMisc.zoom()<cr>', { desc = 'Zoom current window' })
-set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { silent = true })
+set('n', '<leader>x', '<cmd>!chmod +x %<cr>', { desc = 'make this file executable', silent = true })
 set('n', '<C-c>', '<cmd>nohlsearch<cr>')
 
 -- Helpful keymap in vertical edit mode
@@ -30,17 +30,15 @@ set('n', 'gl', '<cmd>diffget //3<cr>')
 set('v', 'J', ":m '>+1<cr>gv=gv")
 set('v', 'K', ":m '<-2<cr>gv=gv")
 
--- Stay in indent mode
+-- Stay in visual mode when indenting
 set('v', '<', '<gv')
 set('v', '>', '>gv')
 
--- Navigate between location list items
-set('n', '<leader>k', '<cmd>lnext<cr>zz', { desc = 'Next item in location list' })
-set('n', '<leader>j', '<cmd>lprev<cr>zz', { desc = 'Previous item in location list' })
-
--- Navigate between quickfix list items
-set('n', '<leader>k', '<cmd>cnext<cr>zz', { desc = 'Next item in qfixlist' })
-set('n', '<leader>j', '<cmd>cprev<cr>zz', { desc = 'Previous item in qfixlist' })
+-- Jump to previous/next item in quickfix/location list
+set('n', '<leader>k', '<cmd>lprev<cr>zz', { desc = 'Previous item in location list' })
+set('n', '<leader>j', '<cmd>lnext<cr>zz', { desc = 'Next item in location list' })
+set('n', '<leader>k', '<cmd>cprev<cr>zz', { desc = 'Previous item in qfixlist' })
+set('n', '<leader>j', '<cmd>cnext<cr>zz', { desc = 'Next item in qfixlist' })
 
 -- Centers the cursor within the window after jumping
 set('n', '<C-d>', '<C-d>zz')
@@ -55,13 +53,6 @@ set('v', '<leader>y', '"+y')
 set('n', '<leader>Y', '"+Y')
 set('n', '<leader>d', '"_d')
 set('v', '<leader>d', '"_d')
-
--- Keymaps for tabpages
-set('n', '<s-t>', '<cmd>tabnew<cr>', { desc = 'New tabpage' })
-set('n', '<s-c>', '<cmd>tabclose<cr>', { desc = 'Close current tabpage' })
-set('n', '<s-x>', '<cmd>tabonly<cr>', { desc = 'Close all other tabpages' })
-set('n', '<s-h>', '<cmd>tabp<cr>', { desc = 'Go to previous tabpage' })
-set('n', '<s-l>', '<cmd>tabn<cr>', { desc = 'Go to next tabpage' })
 
 -- Diagnostic keymaps
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
