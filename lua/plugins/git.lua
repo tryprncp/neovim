@@ -3,6 +3,7 @@ return {
   {
     'tpope/vim-fugitive',
     cmd = 'Git',
+    event = 'BufReadPre',
     keys = {
       { '<leader>gs', '<cmd>Git<cr>', desc = 'Open git window' },
     },
