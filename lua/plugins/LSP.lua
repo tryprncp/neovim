@@ -164,8 +164,16 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        c = { 'clang-format' },
         python = { 'autopep8' },
+        c = { 'clang_format' },
+        cpp = { 'clang_format' },
+      },
+      formatters = {
+        clang_format = {
+          args = {
+            '--style={BasedOnStyle: Google, IndentWidth: 4, UseTab: Never}',
+          },
+        },
       },
     },
   },
