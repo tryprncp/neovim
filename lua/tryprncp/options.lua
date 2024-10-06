@@ -10,6 +10,9 @@ set.expandtab = true
 set.breakindent = true
 set.smartindent = true
 
+-- Folds
+set.foldcolumn = 'auto'
+
 -- Disable mouse
 set.mouse = ''
 
