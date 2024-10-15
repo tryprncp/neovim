@@ -23,54 +23,94 @@ return {
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
-        local function map(mode, l, r, opts)
+        local function set(mode, l, r, opts)
           opts = opts or {}
           opts.buffer = bufnr
           vim.keymap.set(mode, l, r, opts)
         end
 
-        -- Navigation
-        map('n', ']c', function()
+        -- function to refresh the vim-fugitive window
+        local function reload_fugitive_index()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            if vim.startswith(bufname, 'fugitive://') and string.find(bufname, '.git//') then
+              vim.api.nvim_buf_call(buf, function()
+                vim.cmd.edit()
+              end)
+            end
+          end
+        end
+
+        -- Git actions
+        -- visual mode
+        set('v', '<leader>ga', function()
+          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          reload_fugitive_index()
+        end, { desc = 'stage git hunk' })
+
+        set('v', '<leader>gr', function()
+          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          reload_fugitive_index()
+        end, { desc = 'reset git hunk' })
+
+        -- normal mode
+        set('n', ']c', function()
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
           else
             gitsigns.nav_hunk 'next'
           end
-        end, { desc = 'Jump to next git [c]hange' })
+        end, { desc = 'go to next hunk' })
 
-        map('n', '[c', function()
+        set('n', '[c', function()
           if vim.wo.diff then
             vim.cmd.normal { '[c', bang = true }
           else
             gitsigns.nav_hunk 'prev'
           end
-        end, { desc = 'Jump to previous git [c]hange' })
+        end, { desc = 'go to previous hunk' })
 
-        -- Actions
-        -- visual mode
-        map('v', '<leader>ga', function()
-          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'stage git hunk' })
-        map('v', '<leader>gr', function()
-          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'reset git hunk' })
-        -- normal mode
-        map('n', '<leader>gn', gitsigns.next_hunk, { desc = 'go to next hunk' })
-        map('n', '<leader>gN', gitsigns.prev_hunk, { desc = 'go to previous hunk' })
-        map('n', '<leader>ga', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
-        map('n', '<leader>gr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
-        map('n', '<leader>gA', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-        map('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
-        map('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
-        map('n', '<leader>gb', gitsigns.blame_line, { desc = 'git [b]lame line' })
-        map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
-        map('n', '<leader>gD', function()
+        set('n', '<leader>ga', function()
+          gitsigns.stage_hunk()
+          reload_fugitive_index()
+        end, { desc = 'git stage hunk' })
+
+        set('n', '<leader>gA', function()
+          gitsigns.stage_buffer()
+          reload_fugitive_index()
+        end, { desc = 'git stage buffer' })
+
+        set('n', '<leader>gu', function()
+          gitsigns.undo_stage_hunk()
+          reload_fugitive_index()
+        end, { desc = 'git [u]ndo staged hunk' })
+
+        set('n', '<leader>gU', function()
+          gitsigns.reset_buffer_index()
+          reload_fugitive_index()
+        end, { desc = 'git [U]ndo all staged hunks' })
+
+        set('n', '<leader>gr', function()
+          gitsigns.reset_hunk()
+          reload_fugitive_index()
+        end, { desc = 'git [r]eset hunk' })
+
+        set('n', '<leader>gR', function()
+          gitsigns.reset_buffer()
+          reload_fugitive_index()
+        end, { desc = 'git [R]eset buffer' })
+
+        set('n', '<leader>gD', function()
           gitsigns.diffthis '@'
         end, { desc = 'git [D]iff against last commit' })
+
+        set('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+        set('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
+        set('n', '<leader>gb', gitsigns.blame_line, { desc = 'git [b]lame line' })
+
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+        set('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
+        set('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
       end,
     },
   },
